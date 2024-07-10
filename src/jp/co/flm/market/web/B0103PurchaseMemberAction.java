@@ -125,6 +125,9 @@ public class B0103PurchaseMemberAction {
 
                 //ショッピングカートを取得する
                 ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
+                
+                //ショッピングカート情報をセッションスコープへ格納する。
+                session.setAttribute("B01ShoppingCart", cart);
 
                 page = "purchase-products-view.jsp";
 

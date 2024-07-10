@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import jp.co.flm.market.common.MarketBusinessException;
-import jp.co.flm.market.common.MarketSystemException;
 import jp.co.flm.market.entity.Member;
 import jp.co.flm.market.entity.Orders;
 
@@ -48,7 +46,7 @@ public class B0103PurchaseProductsAction {
             //会員情報を取得する
             Member member = (Member) session.getAttribute("CommonLoginMember");
 
-            // ショッピングカートができていない場合、エラーメッセージをリクエストスコープに格納する。
+            // ショッピングカートができていないもしくは会員情報取得ができてない場合、エラーメッセージをリクエストスコープに格納する。
             if (cart == null || member == null ) {
                 ArrayList<String> errorMessageList = new ArrayList<String>();
                 errorMessageList.add("セッションが無効になりました。再度トップ画面から操作をやりなおしてください。");
@@ -73,12 +71,16 @@ public class B0103PurchaseProductsAction {
         ArrayList<String> errorMessageList = new ArrayList<String>();
 
         // フォームで指定されたクレジットカード番号を取得する。//名前要確認
-        String creditcardno = req.getParameter("creditcardno");
+        String creditcardfull = req.getParameter("creditcardfull");
 
         // 入力値を確認する（空チェック）。
-        if (creditcardno.length() == 0) {
+        if (creditcardfull.length() == 0) {
             errorMessageList.add("クレジットカード番号は入力必須項目です。");
         }
+        // 入力値を確認する（半角16桁の数字かどうか）。
+        else if  (!creditcardfull.matches("^\\d{16}$")) {
+                errorMessageList.add("クレジットカード番号の入力に誤りがあります。");
+            }
 
         // 入力エラーが発生していたかを確認する。
         if (errorMessageList.size() != 0) {
@@ -96,7 +98,7 @@ public class B0103PurchaseProductsAction {
      *            HttpServletRequest
      * @return 次画面のJSP名
      */
-    public String execute(HttpServletRequest req) throws MarketBusinessException, MarketSystemException {
+    public String execute(HttpServletRequest req)  {
 
         String page = null;
 
@@ -105,27 +107,36 @@ public class B0103PurchaseProductsAction {
         page = validate(req);
 
         if (page == null) {
-            //セッションを取得する
-            HttpSession session = req.getSession(false);
 
+          //セッションを取得する
+            HttpSession session = req.getSession(false);
+            
             // フォームで指定されたクレジットカード番号を取得する。
             String creditcardfull = req.getParameter("creditcardfull");
 
             // クレジットカード番号の下4桁を取得する
             String creditcardNo = creditcardfull.substring(creditcardfull.length() - 4);
-
-            // セッションへクレジットカード番号の下4桁を格納する。
-            session.setAttribute("creditcardNo", creditcardNo);
-
-            //ショッピングカートを取得する
-            ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
-
+            
             //会員情報を取得する。
             Member member = (Member) session.getAttribute("CommonLoginMember");
 
+            //ショッピングカートを取得する
+            ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
+            
+            //会員IDとクレジットカード番号の情報をcartの中に入れていく
+            for(Orders order: cart) {
+                order.setCreditCardId(creditcardNo);
+                order.setMemberId(member.getMemberId());               
+            }
+            
+            //ショッピングカート情報をセッションスコープへ格納する。
+            session.setAttribute("B01ShoppingCart", cart);
+
             page = "purchase-check-view.jsp";
-    }
+     }
         return page;
     }
 }
+
+
 

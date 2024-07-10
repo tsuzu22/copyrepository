@@ -12,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import jp.co.flm.market.common.MarketSystemException;
 import jp.co.flm.market.entity.Orders;
-import jp.co.flm.market.entity.Stock;
-import jp.co.flm.market.entity.Member;
 import jp.co.flm.market.logic.PurchaseProductsLogic;
 
 /**
@@ -46,14 +44,8 @@ public class B0103PurchaseCheckAction {
             // ショッピングカートを取得する。
             ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
 
-            //会員情報を取得する
-            Member member = (Member) session.getAttribute("CommonLoginMember");
-
-            //クレジットカード番号を取得する
-            String creditcardNo = (String) session.getAttribute("creditcardNo");
-
             // ショッピングカートができていない場合、エラーメッセージをリクエストスコープに格納する。
-            if (cart == null || member == null || creditcardNo == null) {
+            if (cart == null) {
                 ArrayList<String> errorMessageList = new ArrayList<String>();
                 errorMessageList.add("セッションが無効になりました。再度トップ画面から操作をやりなおしてください。");
                 req.setAttribute("errorMessageList", errorMessageList);
@@ -82,15 +74,10 @@ public class B0103PurchaseCheckAction {
             // ショッピングカートを取得する。
             ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
 
-            //会員情報を取得する。
-            Member member = (Member) session.getAttribute("CommonLoginMember");
-
-            //クレジットカード番号を取得する。
-            String creditcardNo = (String) session.getAttribute("creditcardNo");
-
             // 商品情報の追加、会員情報の更新、在庫の更新を行う
+            //引数が正しいかどうか確かめる
             PurchaseProductsLogic logic = new PurchaseProductsLogic();
-            cart = logic.processOrder(cart, member, creditcardNo);
+            logic.processOrder(cart);
 
             page = "purchase-result-view.jsp";
 
