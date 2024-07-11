@@ -1,4 +1,5 @@
 /**
+ /**
  * jp.co.flm.market.web.B0101AddToCartAction
  *
  * All Rights Reserved, Copyright Fujitsu Learning Media Limited
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import jp.co.flm.market.common.MarketSystemException;
+import jp.co.flm.market.common.MarketBusinessException;
 import jp.co.flm.market.entity.Orders;
 import jp.co.flm.market.logic.ShoppingCartLogic;
 
@@ -76,7 +78,16 @@ public class B0101AddToCartAction {
             req.setAttribute("message", "ショッピングカートへ商品を追加しました。");
 
             page = "shopping-cart-view.jsp";
+        } catch(MarketBusinessException e) {
+            // エラーメッセージを取得する。
+            String errorMessage = e.getMessage();
 
+            // リクエストスコープへエラーメッセージを格納する。
+            ArrayList<String> errorMessageList = new ArrayList<String>();
+            errorMessageList.add(errorMessage);
+            req.setAttribute("errorMessageList", errorMessageList);
+
+            page = "error.jsp";
         } catch (MarketSystemException e) {
             // エラーメッセージを取得する。
             String errorMessage = e.getMessage();

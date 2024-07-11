@@ -65,10 +65,11 @@ public class B0103PurchaseCheckAction {
     public String execute(HttpServletRequest req) {
 
         String page = null;
+        page =checkSession(req);
 
+        if (page == null) {
         try {
             // セッションを取得する。
-            checkSession(req);
             HttpSession session = req.getSession(false);
 
             // ショッピングカートを取得する。
@@ -91,6 +92,7 @@ public class B0103PurchaseCheckAction {
             req.setAttribute("errorMessageList", errorMessageList);
 
             page = "error.jsp";
+        }
         }
 
         return page;

@@ -102,9 +102,11 @@ public class B0103PurchaseProductsAction {
 
         String page = null;
 
-        checkSession(req);
+        page = checkSession(req);
 
+        if (page == null) {
         page = validate(req);
+        }
 
         if (page == null) {
 

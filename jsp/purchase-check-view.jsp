@@ -5,26 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>オンラインショップ</title>
+<title>商品購入確認</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
 	<jsp:include page="/jsp/header-non-menu.jsp" />
 	<div id="mainArea">
-		<h1>商品購入</h1>
-
+		<h1>商品購入確認画面</h1>
 		<%-- contents start --%>
-
-		<div id="target" style="color: red;">
-			<c:forEach var="errorMessage" items="${errorMessageList}" varStatus="status">
-				<p>
-					<c:out value="${errorMessage}" />
-				</p>
-			</c:forEach>
-		</div>
-
-		<h2>会員情報</h2>
+		<br> <br> <br> <br> <br>
 		<table border="1">
 			<tr>
 				<th>会員ID</th>
@@ -35,29 +25,10 @@
 				<td><c:out value="${CommonLoginMember.memberName}" /></td>
 			</tr>
 			<tr>
-				<th>住所</th>
-				<td><c:out value="${CommonLoginMember.address}" /></td>
-			</tr>
-			<tr>
-				<th>電話番号</th>
-				<td><c:out value="${CommonLoginMember.phone}" /></td>
+				<th>クレジットカード番号</th>
+				<td><c:out value="${B01ShoppingCart.creditCardId}" /></td>
 			</tr>
 		</table>
-
-		<form method="post" action="${pageContext.request.contextPath}/mserv" id="chkForm">
-		<h2>クレジットカード番号入力</h2>
-			<table>
-				<tr>
-					<td>クレジットカード番号</td>
-					<td><input type="text" name="creditcardfull" id="creditcardfull" size="20"></td>
-				</tr>
-			</table>
-			<br> <input type="hidden" name="flag" value="B0103PurchaseMember">
-			<input type="submit" value="決定">
-		</form>
-
-
-		<c:if test="${!empty B01ShoppingCart}">
 
 		<form method="get" action="${pageContext.request.contextPath}/mserv">
 		<h2>購入内容</h2>
@@ -99,17 +70,23 @@
 					</tr>
 				</table>
 
-			</form>
+			<br>
+			<input type="hidden" name="flag" value="B0103PurchaseCheck">
+			<input type="submit" value="確定">
 
-			</c:if>
+		</form>
 
-		<p>
-			<a href="${pageContext.request.contextPath}/mserv">[トップに戻る]</a>
-		</p>
+			<br>
+			<br>
+			<a href="${pageContext.request.contextPath}/mserv?flag=B0103PurchaseCheck">[戻る]</a>
+
+		<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+		<a href="${pageContext.request.contextPath}/mserv">[トップに戻る]</a>
+
 		<%-- contents end --%>
 	</div>
 	<div id="footerArea">
-		<small> Copyright YYYY FUJITSU LEARNING MEDIA LIMITED </small>
+		<small>Copyright YYYY FUJITSU LEARNING MEDIA LIMITED</small>
 	</div>
 </body>
 </html>

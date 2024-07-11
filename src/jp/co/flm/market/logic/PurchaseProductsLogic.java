@@ -98,8 +98,7 @@ public class PurchaseProductsLogic {
             updateMemberPoint(order.getMemberId(), order.getProduct().getPoint()); // 会員ポイントの更新
             }
 
-
-           // トランザクションのコミット
+           // トランザクションのコミット。データベースへの更新内容が反映が確定する
             con.commit();
 
         } catch (SQLException e) {
@@ -116,8 +115,6 @@ public class PurchaseProductsLogic {
         } finally {
                 try {
                     if(con != null) {
-                    // オートコミット有効化
-                    con.setAutoCommit(true);
                     // データベース接続の切断
                     con.close();
                     }

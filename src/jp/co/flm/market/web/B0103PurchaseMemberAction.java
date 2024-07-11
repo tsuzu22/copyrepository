@@ -102,11 +102,15 @@ public class B0103PurchaseMemberAction {
 
         String page = null;
 
-        checkSession(req);
-
-        page = validate(req);
+        page = checkSession(req);
 
         if (page == null) {
+            
+            page = validate(req);
+        }
+            
+        if (page == null) {
+            
             try {
 
                 // フォームで指定された会員IDとパスワードを取得する。
