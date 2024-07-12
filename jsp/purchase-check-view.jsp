@@ -79,7 +79,7 @@
 
 			<br>
 			<br>
-			<a href="${pageContext.request.contextPath}/mserv?flag=B0103PurchaseProducts">[戻る]</a>
+			<a href="${pageContext.request.contextPath}/mserv?flag=B0103PurchaseProductsReturn">[戻る]</a>
 
 		<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 		<a href="${pageContext.request.contextPath}/mserv">[トップに戻る]</a>

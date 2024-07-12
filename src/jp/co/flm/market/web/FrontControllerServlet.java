@@ -104,6 +104,10 @@ public class FrontControllerServlet extends HttpServlet {
                 B0103PurchaseProductsAction b0103PurchaseProductsAction = new B0103PurchaseProductsAction();
                 page = b0103PurchaseProductsAction.execute(request);
                 break;
+            case "B0103PurchaseProductsReturn":
+                B0103PurchaseProductsReturnAction b0103PurchaseProductsReturn = new B0103PurchaseProductsReturnAction();
+                page = b0103PurchaseProductsReturn.execute(request);
+                break;
             case "B0103PurchaseCheck":
                 B0103PurchaseCheckAction b0103PurchaseCheckAction = new B0103PurchaseCheckAction();
                 page = b0103PurchaseCheckAction.execute(request);
