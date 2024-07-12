@@ -1,5 +1,4 @@
-/**
- * jp.co.flm.market.web.B0103PurchaseProductsAction
+/* jp.co.flm.market.web.B0103PurchaseProductsReturnAction
  *
  * All Rights Reserved, Copyright Fujitsu Learning Media Limited
  */
@@ -15,12 +14,12 @@ import jp.co.flm.market.entity.Orders;
 import jp.co.flm.market.entity.Product;
 
 /**
- * 商品購入画面へ遷移するアクションクラスです。
+ * 商品購入画面へ戻るアクションクラスです。
  *
  * @author FLM
  * @version 1.0 YYYY/MM/DD
  */
-public class B0103PurchaseProductsAction {
+public class B0103PurchaseProductsReturnAction {
 
     /**
      * セッションチェックを行う。
@@ -46,8 +45,6 @@ public class B0103PurchaseProductsAction {
 
             //会員情報を取得する
             Member member = (Member) session.getAttribute("CommonLoginMember");
-
-
 
         }
         return page;
@@ -135,12 +132,12 @@ public class B0103PurchaseProductsAction {
             test2.setPrice(10000);
             test2.setPoint(100);
 
-            test.setProduct(test2);           
+            test.setProduct(test2);
 
             cart2.add(test);
-            
+
             session.setAttribute("B01ShoppingCart", cart2);
-            
+
             ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
 
             //会員IDとクレジットカード番号の情報をcartの中に入れていく

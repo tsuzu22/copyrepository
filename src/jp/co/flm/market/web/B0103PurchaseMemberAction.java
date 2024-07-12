@@ -45,13 +45,7 @@ public class B0103PurchaseMemberAction {
         } else {
             // ショッピングカートを取得する。
             ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
-            // ショッピングカートができていない場合、エラーメッセージをリクエストスコープに格納する。
-            if (cart == null) {
-                ArrayList<String> errorMessageList = new ArrayList<String>();
-                errorMessageList.add("セッションが無効になりました。再度トップ画面から操作をやりなおしてください。");
-                req.setAttribute("errorMessageList", errorMessageList);
-                page = "error.jsp";
-            }
+
         }
         return page;
     }
@@ -105,12 +99,12 @@ public class B0103PurchaseMemberAction {
         page = checkSession(req);
 
         if (page == null) {
-            
+
             page = validate(req);
         }
-            
+
         if (page == null) {
-            
+
             try {
 
                 // フォームで指定された会員IDとパスワードを取得する。
@@ -129,7 +123,7 @@ public class B0103PurchaseMemberAction {
 
                 //ショッピングカートを取得する
                 ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
-                
+
                 //ショッピングカート情報をセッションスコープへ格納する。
                 session.setAttribute("B01ShoppingCart", cart);
 

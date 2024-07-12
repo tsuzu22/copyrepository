@@ -26,8 +26,9 @@
 			</tr>
 			<tr>
 				<th>クレジットカード番号</th>
-				<td><c:out value="${B01ShoppingCart.creditCardId}" /></td>
+				<td><c:out value="${B01ShoppingCart[0].creditCardId}" /></td>
 			</tr>
+
 		</table>
 
 		<form method="get" action="${pageContext.request.contextPath}/mserv">
@@ -78,7 +79,7 @@
 
 			<br>
 			<br>
-			<a href="${pageContext.request.contextPath}/mserv?flag=B0103PurchaseCheck">[戻る]</a>
+			<a href="${pageContext.request.contextPath}/mserv?flag=B0103PurchaseProducts">[戻る]</a>
 
 		<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 		<a href="${pageContext.request.contextPath}/mserv">[トップに戻る]</a>

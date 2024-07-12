@@ -49,10 +49,10 @@
 			<table>
 				<tr>
 					<td>クレジットカード番号</td>
-					<td><input type="text" name="creditcardfull" id="creditcardfull" size="20"></td>
+					<td><input type="text" name="creditCardIdfull" id="creditCardIdfull" size="20"></td>
 				</tr>
 			</table>
-			<br> <input type="hidden" name="flag" value="B0103PurchaseMember">
+			<br> <input type="hidden" name="flag" value="B0103PurchaseProducts">
 			<input type="submit" value="決定">
 		</form>
 
