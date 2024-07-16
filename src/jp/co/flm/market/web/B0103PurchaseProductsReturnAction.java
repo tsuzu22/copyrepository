@@ -39,23 +39,23 @@ public class B0103PurchaseProductsReturnAction {
             req.setAttribute("errorMessageList", errorMessageList);
             page = "error.jsp";
         } else {
-//            // ショッピングカートを取得する。
-//            ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
-//
-//            //会員情報を取得する
-//            Member member = (Member) session.getAttribute("CommonLoginMember");
-//
-//            page = "purchase-products-view.jsp";
-//
-//         // ショッピングカートができていないもしくは会員情報取得ができてない場合、エラーメッセージをリクエストスコープに格納する。
-//            if (cart == null || member == null ) {
-//                ArrayList<String> errorMessageList = new ArrayList<String>();
-//                errorMessageList.add("セッションが無効になりました。再度トップ画面から操作をやりなおしてください。");
-//                req.setAttribute("errorMessageList", errorMessageList);
-//
-//                page = "error.jsp";
-//
-//            }
+            // ショッピングカートを取得する。
+            ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
+
+            //会員情報を取得する
+            Member member = (Member) session.getAttribute("CommonLoginMember");
+
+            page = "purchase-products-view.jsp";
+
+         // ショッピングカートができていないもしくは会員情報取得ができてない場合、エラーメッセージをリクエストスコープに格納する。
+            if (cart == null || member == null ) {
+                ArrayList<String> errorMessageList = new ArrayList<String>();
+                errorMessageList.add("セッションが無効になりました。再度トップ画面から操作をやりなおしてください。");
+                req.setAttribute("errorMessageList", errorMessageList);
+
+                page = "error.jsp";
+
+            }
 
         }
         return page;

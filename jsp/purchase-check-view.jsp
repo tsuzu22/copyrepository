@@ -14,7 +14,7 @@
 	<div id="mainArea">
 		<h1>商品購入確認画面</h1>
 		<%-- contents start --%>
-		<br> <br> <br> <br> <br>
+		<h2>会員情報</h2>
 		<table border="1">
 			<tr>
 				<th>会員ID</th>
@@ -77,12 +77,13 @@
 
 		</form>
 
-			<br>
-			<br>
+					<br>
 			<a href="${pageContext.request.contextPath}/mserv?flag=B0103PurchaseProductsReturn">[戻る]</a>
 
-		<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+		<br>
+		<p>
 		<a href="${pageContext.request.contextPath}/mserv">[トップに戻る]</a>
+		</p>
 
 		<%-- contents end --%>
 	</div>

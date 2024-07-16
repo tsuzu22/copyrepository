@@ -1,5 +1,4 @@
 /**
- /**
  * jp.co.flm.market.web.B0101AddToCartAction
  *
  * All Rights Reserved, Copyright Fujitsu Learning Media Limited

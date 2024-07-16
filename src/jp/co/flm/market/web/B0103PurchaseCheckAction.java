@@ -41,18 +41,18 @@ public class B0103PurchaseCheckAction {
             req.setAttribute("errorMessageList", errorMessageList);
             page = "error.jsp";
         } else {
-//            // ショッピングカートを取得する。
-//            ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
-//
-//         // ショッピングカートができていない場合、エラーメッセージをリクエストスコープに格納する。
-//            if (cart == null) {
-//                ArrayList<String> errorMessageList = new ArrayList<String>();
-//                errorMessageList.add("セッションが無効になりました。再度トップ画面から操作をやりなおしてください。");
-//                req.setAttribute("errorMessageList", errorMessageList);
-//
-//                page = "error.jsp";
-//
-//            }
+            // ショッピングカートを取得する。
+            ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
+
+         // ショッピングカートができていない場合、エラーメッセージをリクエストスコープに格納する。
+            if (cart == null) {
+                ArrayList<String> errorMessageList = new ArrayList<String>();
+                errorMessageList.add("セッションが無効になりました。再度トップ画面から操作をやりなおしてください。");
+                req.setAttribute("errorMessageList", errorMessageList);
+
+                page = "error.jsp";
+
+            }
 
 
 

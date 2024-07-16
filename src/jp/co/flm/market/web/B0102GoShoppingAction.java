@@ -1,5 +1,4 @@
 /**
- /**
  * jp.co.flm.market.web.B0102GoShoppingAction
  *
  * All Rights Reserved, Copyright Fujitsu Learning Media Limited
