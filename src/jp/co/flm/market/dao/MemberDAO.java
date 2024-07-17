@@ -100,7 +100,7 @@ public class MemberDAO {
         Member member = null;
 
         // SQL文の準備
-        String sql = "SELECT memberid, membername FROM member WHERE memberid=?";//mudei
+        String sql = "SELECT memberid FROM member WHERE memberid=?";
         PreparedStatement stmt = null;
         ResultSet res = null;
 

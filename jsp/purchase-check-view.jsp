@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>商品購入確認</title>
+<style>
+ body {
+            font-family: Arial, sans-serif;
+        }
+        </style>
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>

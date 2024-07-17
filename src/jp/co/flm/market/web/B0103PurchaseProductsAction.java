@@ -127,29 +127,6 @@ public class B0103PurchaseProductsAction {
             //ショッピングカートを取得する
            ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
 
-            //ショッピングカートと連結後消す
-
-//             ArrayList<Orders> cart2 = new ArrayList<Orders>();
-//             Orders test = new Orders();
-//              test.setMemberId(member.getMemberId());
-//             test.setOrderDate("2024-07-12");
-//             test.setCreditCardId(creditCardId);
-//             test.setQuantity(2);
-//
-//             Product test2 = new Product();
-//             test2.setProductId("a01");
-//             test2.setPrice(10000);
-//             test2.setPoint(100);
-//
-//            test.setProduct(test2);
-//
-//              cart2.add(test);
-//
-//               session.setAttribute("B01ShoppingCart", cart2);
-//
-//               ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
-
-
             //会員IDとクレジットカード番号の情報をcartの中に入れていく
             for(Orders order: cart) {
                 order.setCreditCardId(creditCardId);

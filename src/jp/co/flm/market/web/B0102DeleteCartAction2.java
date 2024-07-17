@@ -1,5 +1,5 @@
 /**
- * jp.co.flm.market.web.CommonViewCartAction
+ * jp.co.flm.market.web.B0102DeleteCartAction
  *
  * All Rights Reserved, Copyright Fujitsu Learning Media Limited
  */
@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import jp.co.flm.market.entity.Orders;
+import jp.co.flm.market.logic.ShoppingCartLogic;
 
 /**
- * ショッピングカート画面へ遷移するアクションクラスです。
+ * ショッピングカートから商品を削除し、ショッピングカート画面へ遷移するアクションクラスです。
  *
  * @author FLM
  * @version 1.0 YYYY/MM/DD
  */
-public class CommonViewCartAction{
+public class B0102DeleteCartAction2 {
 
     /**
      * セッションチェックを行う。
@@ -34,7 +35,7 @@ public class CommonViewCartAction{
         HttpSession session = req.getSession(false);
 
         if (session == null) {
-            // セッションが確立されていない場合、エラーメッセージをリクエストスコープに格納する。
+            // セッションが確立されていない場合、エラーメッセージをリクエストスコープへ格納する。
             ArrayList<String> errorMessageList = new ArrayList<String>();
             errorMessageList.add("セッションが無効になりました。再度トップ画面から操作をやりなおしてください。");
             req.setAttribute("errorMessageList", errorMessageList);
@@ -42,10 +43,12 @@ public class CommonViewCartAction{
         } else {
             // ショッピングカートを取得する。
             ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
-            // ショッピングカートができていない場合、作成する。
+            // ショッピングカートができていない場合、エラーメッセージをリクエストスコープへ格納する。
             if (cart == null) {
-                cart = new ArrayList<Orders>();
-                session.setAttribute("B01ShoppingCart", cart);
+                ArrayList<String> errorMessageList = new ArrayList<String>();
+                errorMessageList.add("セッションが無効になりました。再度トップ画面から操作をやりなおしてください。");
+                req.setAttribute("errorMessageList", errorMessageList);
+                page = "error.jsp";
             }
         }
 
@@ -63,23 +66,27 @@ public class CommonViewCartAction{
 
         String page = null;
 
+        // セッションを取得する。
         page = checkSession(req);
 
         if (page == null) {
-            // セッションを取得する。
             HttpSession session = req.getSession(false);
 
             // ショッピングカートを取得する。
             ArrayList<Orders> cart = (ArrayList<Orders>) session.getAttribute("B01ShoppingCart");
 
-            // ショッピングカートが空かどうかを確認する。
-            if (cart.size() == 0) {
-                // ショッピングカートが空である場合、メッセージを設定する。
-                req.setAttribute("message", "ショッピングカートに商品がありません。");
-            }
+            // フォームで指定された削除対象の商品情報を取得する。
+            String deleteProductId = req.getParameter("deleteProductId");
+            ShoppingCartLogic logic = new ShoppingCartLogic();
+            cart = logic.deleteFromCart(cart, deleteProductId);
+
+            // ショッピングカートをセッションへ格納する。
+            session.setAttribute("B01ShoppingCart", cart);
+
+            // ショッピングカートから商品を削除したことを伝えるメッセージを格納する。
+            req.setAttribute("message", "ショッピングカート内の商品を削除しました。");
 
             page = "shopping-cart-view.jsp";
-
         }
 
         return page;

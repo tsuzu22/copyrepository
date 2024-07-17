@@ -19,7 +19,7 @@
       <span>ようこそゲスト様</span>
       <br>
         <a href="${pageContext.request.contextPath}/mserv?flag=CommonLogin">ログイン</a>
-        <a href="${pageContext.request.contextPath}/mserv?flag=B0201CheckEmailAction">会員登録</a>
+        <a href="${pageContext.request.contextPath}/mserv?flag=CommonMemberRegisterAction">会員登録</a>
       </c:if>
 
 	</div>
