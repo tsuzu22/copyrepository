@@ -49,7 +49,7 @@ public class MemberDAO {
         Member member = null;
 
         // SQL文の準備
-        String sql = "SELECT memberid, membername, gender, address, phone, memberpoint "
+        String sql = "SELECT memberid, membername, gender, address, phone, memberpoint, password "
             + "FROM member WHERE memberid=? AND password=?";
         PreparedStatement stmt = null;
         ResultSet res = null;
@@ -70,6 +70,7 @@ public class MemberDAO {
                 member.setAddress(res.getString("address"));
                 member.setPhone(res.getString("phone"));
                 member.setMemberPoint(res.getInt("memberpoint"));
+                member.setPassword(res.getString("password"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

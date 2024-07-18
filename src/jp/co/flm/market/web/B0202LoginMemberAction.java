@@ -22,7 +22,7 @@ import jp.co.flm.market.logic.MemberInfoLogic;
  * @author FLM
  * @version 1.0 YYYY/MM/DD
  */
-public class B0202LoginMemberAction {
+public class B0202LoginMemberAction implements ActionIF{
 
     /**
      * セッションチェックを行う。
@@ -104,7 +104,7 @@ public class B0202LoginMemberAction {
                 ArrayList<Orders> orderList = logic.getOrderList(memberId);
 
                 // 購入履歴情報をリクエストスコープへ格納する。
-                req.setAttribute("orderList", orderList);
+                session.setAttribute("orderList", orderList);
 
                 if (orderList.size() == 0) {
                     // 購入履歴情報がなかった場合、メッセージをリクエストスコープへ格納する。

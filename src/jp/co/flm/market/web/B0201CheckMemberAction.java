@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 import jp.co.flm.market.common.MarketSystemException;
 import jp.co.flm.market.entity.Member;
 
-public class B0201CheckMemberAction {
+public class B0201CheckMemberAction implements ActionIF{
     //pageを初期化
     String page = null;
 
@@ -33,20 +33,20 @@ public class B0201CheckMemberAction {
             String phone = req.getParameter("phone");
             String password = req.getParameter("password");
 
-            //入力値を確認する（空チェック）
-            if (memberName.length() == 0) {
+            // 入力値を確認する（空チェック）
+            if (memberName == null || memberName.length() == 0) {
                 errorMessageList.add("名前は入力必須項目です。");
             }
-            if (gender.length() == 0) {
+            if (gender == null || gender.length() == 0) {
                 errorMessageList.add("性別は入力必須項目です。");
             }
-            if (address.length() == 0) {
+            if (address == null || address.length() == 0) {
                 errorMessageList.add("住所は入力必須項目です。");
             }
-            if (phone.length() == 0) {
+            if (phone == null || phone.length() == 0) {
                 errorMessageList.add("電話番号は入力必須項目です。");
             }
-            if (password.length() == 0) {
+            if (password == null || password.length() == 0) {
                 errorMessageList.add("パスワードは入力必須項目です。");
             }
 
@@ -54,10 +54,10 @@ public class B0201CheckMemberAction {
             if(memberName.length() >41) {
                 errorMessageList.add("名前は40字以内で入力してください。");
             }
-            if(address.length() >81) {
+            if(address.length() > 80) {
                 errorMessageList.add("住所は80字以内で入力してください。");
             }
-            if(phone.length() >14) {
+            if(phone.length() >=14) {
                 errorMessageList.add("電話番号は13字以内で入力してください。");
             }
             if(password.length() < 4 || password.length() > 8) {
@@ -91,7 +91,7 @@ public class B0201CheckMemberAction {
                 HttpSession session = req.getSession(false);
 
                //CheckEmailActionクラスで生成したオブジェクトに"member"セッションの情報を代入
-                Member member = (Member) session.getAttribute("member");
+                Member member = (Member) session.getAttribute("CommonLoginMember");
 
                 //Memberオブジェクトにそれぞれの値を代入
                 member.setMemberName(memberName);
@@ -101,7 +101,7 @@ public class B0201CheckMemberAction {
                 member.setPassword(password);
 
                 // セッションに会員情報を保存する
-                session.setAttribute("member", member);
+                session.setAttribute("CommonLoginMember", member);
 
 
                 //確認画面に遷移する

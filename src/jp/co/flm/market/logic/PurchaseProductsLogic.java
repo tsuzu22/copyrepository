@@ -74,6 +74,7 @@ public class PurchaseProductsLogic {
         return member;
     }
 
+
     /**
      * 注文処理を行うメソッド
      * @param cart ショッピングカートの注文リスト
@@ -81,56 +82,50 @@ public class PurchaseProductsLogic {
      *             本システムのシステム例外
      */
 
-
-    public void processOrder(ArrayList<Orders> cart)
-                    throws MarketSystemException {
+     public void processOrder(ArrayList<Orders> cart) throws MarketSystemException {
 
         Connection con = null;
 
+        try {
+            con = ConnectionManager.getConnection();
+            //オートコミット解除
+            con.setAutoCommit(false);
+
+            // 注文処理の実行
+            for(Orders order: cart) {
+            insertOrder(order); // 注文の挿入
+            selectStockForUpdate(order.getProduct().getProductId()); // 在庫の取得
+            updateStock(order.getProduct().getProductId(), order.getQuantity()); // 在庫の更新
+            updateMemberPoint(order.getMemberId(), order.getSubTotalPoint()); // 会員ポイントの更新
+            }
+
+           // トランザクションのコミット。データベースへの更新内容が反映が確定する
+            con.commit();
+
+        } catch (SQLException e) {
+
             try {
-                con = ConnectionManager.getConnection();
-
-                //オートコミット解除
-                con.setAutoCommit(false);
-
-                // 注文処理の実行
-                for(Orders order: cart) {
-                insertOrder(order); // 注文の挿入
-                selectStockForUpdate(order.getProduct().getProductId()); // 在庫の取得
-                updateStock(order.getProduct().getProductId(), order.getQuantity()); // 在庫の更新
-                updateMemberPoint(order.getMemberId(), order.getProduct().getPoint()); // 会員ポイントの更新
+                if(con != null) {
+                // トランザクションのロールバック
+                con.rollback();
                 }
-
-               // トランザクションのコミット。データベースへの更新内容が反映が確定する
-                con.commit();
-
-            } catch (SQLException e) {
-               try {
+            } catch (SQLException e2) {
+                // スタックトレースを出力
+                e2.printStackTrace();
+            }
+            throw new MarketSystemException("システムエラーです。システム管理者に連絡してください。");
+        } finally {
+                try {
                     if(con != null) {
-
-                    // トランザクションのロールバック
-                    con.rollback();
+                    // データベース接続の切断
+                    con.close();
                     }
-                } catch (SQLException e2) {
-
+                } catch(SQLException e3) {
                     // スタックトレースを出力
-                    e2.printStackTrace();
-                }
-                throw new MarketSystemException("システムエラーです。システム管理者に連絡してください。");
-
-            } finally {
-
-                    try {
-                        if(con != null) {
-                        // データベース接続の切断
-                        con.close();
-                        }
-                    } catch(SQLException e3) {
-                        // スタックトレースを出力
-                        e3.printStackTrace();
-                    }
+                    e3.printStackTrace();
                 }
             }
+        }
 
 
     /**
