@@ -101,6 +101,7 @@ public class B0102UpdateCartAction implements ActionIF{
                 page = "shopping-cart-view.jsp";
             }
 
+
             catch(MarketBusinessException e){
              // エラーメッセージを取得する。
                 String errorMessage = e.getMessage();

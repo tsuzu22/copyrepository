@@ -31,8 +31,7 @@ public class B0201RegisterMemberAction implements ActionIF{
 
                 // ログイン済みか確認するフラグを作成
                 session.setAttribute("CommonLoginMember", member);
-                
-                session.removeAttribute("registerMember");
+
                 //次の画面で表示されるように会員情報をsetする
                 req.setAttribute("member", member);
 

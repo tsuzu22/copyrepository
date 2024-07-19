@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: white;
+            background-color: #f0f0f0;
         }
         #mainArea {
             background-color: white;
@@ -36,7 +36,6 @@
         th, td {
             padding: 10px;
             border: 1px solid #ddd;
-            text-align: left;
         }
         th {
             background-color: #f2f2f2;
@@ -64,31 +63,23 @@
         <table>
             <tr>
                 <th>名前</th>
-                <td><c:out value="${registerMember.memberName}" /></td>
+                <td><c:out value="${member.memberName}" /></td>
             </tr>
             <tr>
                 <th>性別</th>
-					<td>
-						<c:if test="${registerMember.gender == 'M'}">男性</c:if>
-						 <c:if test="${registerMember.gender == 'F'}">女性</c:if>
-						 <c:if test="${registerMember.gender == 'O'}">その他</c:if>
-						 <c:if test="${registerMember.gender != 'M' && registerMember.gender != 'F' && registerMember.gender != 'O'}">
-		       								${registerMember.gender}
-		       			</c:if>
-		       		</td>
+                <td><c:out value="${member.gender}" /></td>
             </tr>
             <tr>
-            <tr>
                 <th>住所</th>
-                <td><c:out value="${registerMember.address}" /></td>
+                <td><c:out value="${member.address}" /></td>
             </tr>
             <tr>
                 <th>電話番号</th>
-                <td><c:out value="${registerMember.phone}" /></td>
+                <td><c:out value="${member.phone}" /></td>
             </tr>
             <tr>
                 <th>メールアドレス</th>
-                <td><c:out value="${registerMember.memberId}" /></td>
+                <td><c:out value="${member.memberId}" /></td>
             </tr>
         </table>
         <div class="top-link">

@@ -44,7 +44,7 @@ public class ShoppingCartLogic {
         //在庫情報を調査：ゼロの場合エラーメッセージを格納
         if (product != null) {
             int stock = product.getStock().getQuantity(); // 在庫を取得
-            if (stock < 1) {
+            if (stock<1) {
                 throw new MarketBusinessException("商品" + product.getProductName() + " は在庫切れです。");
             }
         }

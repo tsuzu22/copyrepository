@@ -39,7 +39,6 @@ public class B0201CheckMemberAction implements ActionIF{
             }
             if (gender == null || gender.length() == 0) {
                 errorMessageList.add("性別は入力必須項目です。");
-                
             }
             if (address == null || address.length() == 0) {
                 errorMessageList.add("住所は入力必須項目です。");
@@ -63,6 +62,10 @@ public class B0201CheckMemberAction implements ActionIF{
             }
             if(password.length() < 4 || password.length() > 8) {
                 errorMessageList.add("パスワードは4文字以上8文字以内で入力してください。");
+            }
+
+            if (phone != null && !phone.matches("^[0-9\\-]+$")) {
+                errorMessageList.add("電話番号は数字のみを入力してください。");
             }
 
             // 入力エラーが発生していたかを確認する。
