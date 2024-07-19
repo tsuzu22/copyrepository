@@ -7,6 +7,7 @@ package jp.co.flm.market.web;
 
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
+
 import jp.co.flm.market.common.MarketSystemException;
 import jp.co.flm.market.entity.Category;
 import jp.co.flm.market.logic.CommonShowTopPageLogic;
@@ -35,6 +36,7 @@ public class CommonShowTopPageAction implements ActionIF{
             ArrayList<Category> categoryList = logic.returnTop();
          // 検索結果をリクエストスコープに設定する。
             req.setAttribute("categoryList", categoryList);
+
          // 結果画面を戻り値に設定する。
             page = "top-view.jsp";
         } catch(MarketSystemException e) {

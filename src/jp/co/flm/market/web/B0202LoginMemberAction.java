@@ -100,6 +100,9 @@ public class B0202LoginMemberAction implements ActionIF{
                 // 会員情報をセッションへ格納する。
                 session.setAttribute("CommonLoginMember", member);
 
+                // ログインフラグ用のセッションを作成
+                session.setAttribute("flg", member);
+
                 // 購入履歴情報を取得する。
                 ArrayList<Orders> orderList = logic.getOrderList(memberId);
 

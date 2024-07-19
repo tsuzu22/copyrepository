@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>A社オンラインショッピング - 会員登録</title>
+    <title>A社オンラインショッピング - 会員情報更新</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/loginInputCheck.js"></script>
     <style>
@@ -37,14 +37,14 @@
         td:first-child {
             font-weight: bold;
             width: 30%;
-            text-align: left; /* 左揃え */
+            text-align: left;
         }
         input[type="text"], input[type="password"], .radio-group {
             width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            text-align: left; /* 左揃え */
+            text-align: left;
         }
         .radio-group {
             display: flex;
@@ -82,9 +82,9 @@
     </style>
 </head>
 <body>
-    <jsp:include page="/jsp/header-non-menu.jsp" />
+    <jsp:include page="/jsp/header.jsp" />
     <div id="mainArea">
-        <h1>会員登録</h1>
+        <h1>会員情報更新</h1>
         <div id="target">
             <c:forEach var="errorMessage" items="${errorMessageList}" varStatus="status">
                 <p><c:out value="${errorMessage}" /></p>
@@ -94,35 +94,35 @@
             <table>
                 <tr>
                     <td>名前</td>
-                    <td><input type="text" name="memberName" id="memberName" ></td>
+                    <td><input type="text" name="memberName" id="memberName" value="${CommonLoginMember.memberName}"></td>
                 </tr>
                 <tr>
                     <td>性別</td>
                     <td>
                         <div class="radio-group">
-                            <input type="radio" id="male" name="gender" value="M" >
+                            <input type="radio" id="male" name="gender" value="M" ${CommonLoginMember.gender == 'M' ? 'checked' : ''}>
                             <label for="male">男性</label>
-                            <input type="radio" id="female" name="gender" value="F">
+                            <input type="radio" id="female" name="gender" value="F" ${CommonLoginMember.gender == 'F' ? 'checked' : ''}>
                             <label for="female">女性</label>
-                            <input type="radio" id="other" name="gender" value="O">
+                            <input type="radio" id="other" name="gender" value="O" ${CommonLoginMember.gender == 'O' ? 'checked' : ''}>
                             <label for="other">その他</label>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>住所</td>
-                    <td><input type="text" name="address" id="address" ></td>
+                    <td><input type="text" name="address" id="address" value="${CommonLoginMember.address}"></td>
                 </tr>
                 <tr>
                     <td>電話番号</td>
-                    <td><input type="text" name="phone" id="phone" ></td>
+                    <td><input type="text" name="phone" id="phone" value="${CommonLoginMember.phone}"></td>
                 </tr>
                 <tr>
                     <td>パスワード</td>
-                    <td><input type="password" name="password" id="password" ></td>
+                    <td><input type="password" name="password" id="password"></td>
                 </tr>
             </table>
-            <input type="hidden" name="flag" value="B0201CheckMemberAction">
+            <input type="hidden" name="flag" value="B0203UpdateMember">
             <div class="submit-button">
                 <input type="submit" value="確認">
             </div>
@@ -130,9 +130,9 @@
         <div class="top-link">
             <a href="${pageContext.request.contextPath}/mserv">トップへ戻る</a>
         </div>
-      <div id="footerArea">
-        <small>Copyright YYYY FUJITSU LEARNING MEDIA LIMITED</small>
     </div>
+    <div id="footerArea">
+        <small>Copyright YYYY FUJITSU LEARNING MEDIA LIMITED</small>
     </div>
 </body>
 </html>

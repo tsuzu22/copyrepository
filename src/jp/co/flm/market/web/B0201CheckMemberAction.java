@@ -39,6 +39,7 @@ public class B0201CheckMemberAction implements ActionIF{
             }
             if (gender == null || gender.length() == 0) {
                 errorMessageList.add("性別は入力必須項目です。");
+                
             }
             if (address == null || address.length() == 0) {
                 errorMessageList.add("住所は入力必須項目です。");
@@ -91,7 +92,7 @@ public class B0201CheckMemberAction implements ActionIF{
                 HttpSession session = req.getSession(false);
 
                //CheckEmailActionクラスで生成したオブジェクトに"member"セッションの情報を代入
-                Member member = (Member) session.getAttribute("CommonLoginMember");
+                Member member = (Member) session.getAttribute("registerMember");
 
                 //Memberオブジェクトにそれぞれの値を代入
                 member.setMemberName(memberName);
@@ -101,8 +102,7 @@ public class B0201CheckMemberAction implements ActionIF{
                 member.setPassword(password);
 
                 // セッションに会員情報を保存する
-                session.setAttribute("CommonLoginMember", member);
-
+                session.setAttribute("registerMember", member);
 
                 //確認画面に遷移する
                 page = "member-register-confirm-view.jsp";

@@ -79,7 +79,7 @@ public class B0201CheckEmailAction implements ActionIF{
                member.setMemberId(memberId);
 
                //MemberオブジェクトをSessionキー"member"のセッションに格納
-               session.setAttribute("CommonLoginMember", member);
+               session.setAttribute("registerMember", member);
 
                page="member-register-view.jsp";
 
